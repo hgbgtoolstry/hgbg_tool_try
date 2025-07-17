@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多功能设计工具集</title>
+    <style>
+        /* 基础样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 头部样式 */
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* 导航菜单 */
+        .tools-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        .tool-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+        .tool-card h2 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        .tool-card p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .tool-card a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .tool-card a:hover {
+            background-color: #2980b9;
+        }
+
+        /* 工具内容区域（默认隐藏，点击导航后显示） */
+        .tool-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-height: 600px;
+        }
+        .tool-iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 600px;
+            border: none;
+        }
+
+        /* 底部样式 */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #777;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部标题 -->
+        <header>
+            <h1>多功能设计工具集</h1>
+            <p>包含公众号封面、名片、海报生成器，一站式解决设计需求</p>
+        </header>
+
+        <!-- 工具导航菜单 -->
+        <div class="tools-nav">
+            <!-- 封面生成器 -->
+            <div class="tool-card">
+                <h2>公众号封面生成器</h2>
+                <p>快速生成符合平台规范的公众号封面图，支持自定义文字和样式</p>
+                <a href="cover-generator/index.html" target="toolFrame">打开工具</a>
+            </div>
+
+            <!-- 名片生成器 -->
+            <div class="tool-card">
+                <h2>名片生成器</h2>
+                <p>制作个性化电子名片，支持上传头像、编辑联系方式和样式调整</p>
+                <a href="card-generator/index.html" target="toolFrame">打开工具</a>
+            </div>
+
+            <!-- 海报生成器 -->
+            <div class="tool-card">
+                <h2>海报生成器</h2>
+                <p>生成高清海报，支持文字排版、图片上传和导出功能</p>
+                <a href="poster-generator/index.html" target="toolFrame">打开工具</a>
+            </div>
+        </div>
+
+        <!-- 工具内容显示区域（通过iframe嵌入工具页面） -->
+        <div class="tool-content">
+            <iframe id="toolFrame" name="toolFrame" class="tool-iframe" src="" 
+                    title="设计工具内容区域">
+            </iframe>
+        </div>
+
+        <!-- 底部信息 -->
+        <footer>
+            <p>© 2025 多功能设计工具集 | 所有工具均为静态页面，本地操作更安全</p>
+        </footer>
+    </div>
+
+    <script>
+        // 可选：默认加载第一个工具（封面生成器）
+        window.onload = function() {
+            document.getElementById("toolFrame").src = "cover-generator/index.html";
+        };
+    </script>
+</body>
+</html>
