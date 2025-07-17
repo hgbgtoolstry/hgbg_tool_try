@@ -1,0 +1,203 @@
+/* --- 全局与布局 --- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.app-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+  max-width: 1800px;
+}
+
+/* --- 左侧控制面板 --- */
+.controls {
+  flex: 1;
+  min-width: 320px;
+  max-width: 400px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  align-self: flex-start;
+}
+.controls h1 {
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #001f3f;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+.menu-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #0056b3;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+.control-group {
+  margin-bottom: 20px;
+}
+.control-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #555;
+}
+.control-group .sub-label {
+  font-weight: normal;
+  color: #777;
+  font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+.control-group input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: inherit;
+}
+.slider-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+input[type="range"] {
+  flex-grow: 1;
+  cursor: pointer;
+}
+.slider-value {
+  font-size: 12px;
+  color: #333;
+  background: #eee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 50px;
+  text-align: center;
+}
+#export-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+#export-btn:hover {
+  background-color: #0056b3;
+}
+
+/* --- 右侧封面预览 --- */
+.preview {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 642px;
+}
+
+/* --- 核心布局：封面容器 --- */
+#cover-preview {
+  width: 641.5px;
+  height: 191.5px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  background-color: #ccc;
+
+  /* 定义CSS变量 */
+  --overlay-height: 45%;
+  --overlay-opacity: 0.65;
+  --left-line-gap: 15px;
+  --right-line-gap: 10px;
+}
+
+.cover-part {
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #666;
+}
+
+#preview-left {
+  width: calc(900 / 1283 * 100%);
+}
+
+#preview-right {
+  width: calc(383 / 1283 * 100%);
+}
+
+/* --- 遮罩层样式 --- */
+#preview-overlay {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: var(--overlay-height);
+  background-color: rgba(0, 0, 0, var(--overlay-opacity));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* --- 文字容器与样式 --- */
+.text-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  color: white;
+  font-family: "Noto Serif SC", serif;
+  font-weight: 900;
+  text-align: center;
+  line-height: 1.3; /* 调整基础行高 */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* 使用CSS变量控制行间距 */
+#preview-left-title-1 {
+  margin-bottom: var(--left-line-gap);
+}
+#preview-right-title-1 {
+  margin-bottom: var(--right-line-gap);
+}
+
+/* JS将直接控制这些元素的font-size */
+#preview-left-title-1,
+#preview-left-title-2,
+#preview-right-title-1,
+#preview-right-title-2 {
+  display: block; /* 确保span是块级元素，margin生效 */
+}

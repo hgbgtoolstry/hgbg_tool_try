@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>公众号封面生成器 (高级版)</title>
+    <!-- 引入思源宋体 (Noto Serif SC - 900 weight for ExtraBold/Black) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&display=swap" rel="stylesheet">
+    <!-- 引入样式表 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入 html2canvas 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- 左侧：控制面板 -->
+        <div class="controls">
+            <h1>封面内容设置</h1>
+
+            <!-- 左侧封面控制 -->
+            <h2 class="menu-title">左侧封面 (大图)</h2>
+            <div class="control-group">
+                <label for="left-title-1">标题第一行</label>
+                <input type="text" id="left-title-1" value="专题回顾">
+                <label for="left-title-size-1" class="sub-label">字号调整</label>
+                <div class="slider-group">
+                    <input type="range" id="left-title-size-1" min="10" max="120" step="1" value="60">
+                    <span class="slider-value" id="left-title-size-1-value">60px</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="left-title-2">标题第二行</label>
+                <input type="text" id="left-title-2" value="人机交互的未来？人的角色与“它”们的角色">
+                <label for="left-title-size-2" class="sub-label">字号调整</label>
+                <div class="slider-group">
+                    <input type="range" id="left-title-size-2" min="10" max="120" step="1" value="45">
+                    <span class="slider-value" id="left-title-size-2-value">45px</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="left-line-gap">行间距</label>
+                <div class="slider-group">
+                    <input type="range" id="left-line-gap" min="0" max="50" step="1" value="15">
+                    <span class="slider-value" id="left-line-gap-value">15px</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="left-bg-upload">上传左侧背景图 (900x383)</label>
+                <input type="file" id="left-bg-upload" accept="image/*">
+            </div>
+
+            <!-- 右侧封面控制 -->
+            <h2 class="menu-title">右侧封面 (小图)</h2>
+            <div class="control-group">
+                <label for="right-title-1">标题第一行</label>
+                <input type="text" id="right-title-1" value="回归不归">
+                <label for="right-title-size-1" class="sub-label">字号调整</label>
+                <div class="slider-group">
+                    <input type="range" id="right-title-size-1" min="10" max="80" step="1" value="38">
+                    <span class="slider-value" id="right-title-size-1-value">38px</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="right-title-2">标题第二行</label>
+                <input type="text" id="right-title-2" value="专题回顾">
+                <label for="right-title-size-2" class="sub-label">字号调整</label>
+                <div class="slider-group">
+                    <input type="range" id="right-title-size-2" min="10" max="80" step="1" value="38">
+                    <span class="slider-value" id="right-title-size-2-value">38px</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="right-line-gap">行间距</label>
+                <div class="slider-group">
+                    <input type="range" id="right-line-gap" min="0" max="40" step="1" value="10">
+                    <span class="slider-value" id="right-line-gap-value">10px</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="right-bg-upload">上传右侧背景图 (383x383)</label>
+                <input type="file" id="right-bg-upload" accept="image/*">
+            </div>
+
+            <!-- 全局样式控制 -->
+            <h2 class="menu-title">全局样式</h2>
+            <div class="control-group">
+                <label>中间遮罩高度</label>
+                <div class="slider-group">
+                    <input type="range" id="overlay-height" min="0" max="100" step="1" value="45">
+                    <span class="slider-value" id="overlay-height-value">45%</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label>遮罩透明度</label>
+                <div class="slider-group">
+                    <input type="range" id="overlay-opacity" min="0" max="100" step="1" value="65">
+                    <span class="slider-value" id="overlay-opacity-value">65%</span>
+                </div>
+            </div>
+
+            <button id="export-btn">生成并导出图片 (1283x383)</button>
+        </div>
+
+        <!-- 右侧：封面预览 -->
+        <div class="preview">
+            <div id="cover-preview">
+                <!-- 左侧部分 -->
+                <div id="preview-left" class="cover-part">
+                    <div class="text-container">
+                        <span id="preview-left-title-1"></span>
+                        <span id="preview-left-title-2"></span>
+                    </div>
+                </div>
+                <!-- 右侧部分 -->
+                <div id="preview-right" class="cover-part">
+                    <div class="text-container">
+                        <span id="preview-right-title-1"></span>
+                        <span id="preview-right-title-2"></span>
+                    </div>
+                </div>
+                <!-- 黑色遮罩 -->
+                <div id="preview-overlay"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

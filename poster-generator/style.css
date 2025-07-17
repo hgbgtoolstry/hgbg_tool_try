@@ -1,0 +1,231 @@
+/* --- 全局与布局 --- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.app-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+  max-width: 1600px;
+}
+
+/* --- 左侧控制面板 --- */
+.controls {
+  flex: 1;
+  min-width: 320px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  align-self: flex-start;
+}
+.controls h1 {
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #001f3f;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+.menu-title {
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: #001f3f;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+.control-group {
+  margin-bottom: 20px;
+}
+.control-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #555;
+}
+.control-group input[type="text"],
+.control-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: inherit;
+}
+.control-group textarea {
+  resize: vertical;
+}
+.slider-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+input[type="range"] {
+  flex-grow: 1;
+  cursor: pointer;
+}
+.slider-value {
+  font-size: 12px;
+  color: #333;
+  background: #eee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 50px;
+  text-align: center;
+}
+#export-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+#export-btn:hover {
+  background-color: #0056b3;
+}
+
+/* --- 右侧海报预览 --- */
+.preview {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 400px;
+}
+
+/* --- 核心布局：海报容器与CSS变量 --- */
+#poster {
+  width: 621px;
+  aspect-ratio: 1242 / 1660;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+
+  /* 定义间距变量 */
+  --spacing-top: 5%;
+  --spacing-title-gap: 3%;
+  --spacing-main-to-image: 5%;
+  --spacing-image-to-sub: 5%;
+  --spacing-sub-to-credits: 5%;
+}
+
+/* --- 核心布局：带边距的内容区 --- */
+.content-area {
+  padding-left: 7%;
+  padding-right: 7%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.content-top {
+  padding-top: var(--spacing-top);
+  margin-bottom: var(--spacing-main-to-image);
+}
+.content-bottom {
+  padding-top: var(--spacing-image-to-sub);
+  padding-bottom: 5%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* --- 核心布局：全宽图片区 --- */
+.image-container {
+  width: 100%;
+  height: 265px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.image-container img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* --- 海报内元素样式 (修改：全部使用px) --- */
+.top-title {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 900;
+  font-size: 24px; /* 修改 */
+  color: #0f3b83;
+  letter-spacing: 2px;
+}
+.main-title {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 700;
+  font-size: 28px; /* 修改 */
+  color: #4b596f;
+  line-height: 1.4;
+  margin-top: var(--spacing-title-gap);
+}
+.subtitle {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 900;
+  font-size: 18px; /* 修改 */
+  color: #000000;
+  text-align: right;
+  line-height: 1.8;
+  margin-bottom: var(--spacing-sub-to-credits);
+}
+.credits {
+  font-family: "Noto Serif SC", serif;
+  font-weight: 700;
+  font-size: 16px; /* 修改 */
+  color: #0f3b83;
+  line-height: 1.7;
+  margin-top: auto;
+}
+
+/* --- 渐变色块效果 --- */
+.text-with-gradient,
+.text-with-gradient-excerpt {
+  position: relative;
+  display: inline-block;
+  isolation: isolate; /* <<< 关键修复：创建新的堆叠上下文 */
+}
+.text-with-gradient::after,
+.text-with-gradient-excerpt::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-image: linear-gradient(to right, #90f0c2, #a3d8f5);
+  z-index: -1; /* 现在可以安全地使用-1 */
+  opacity: 0.8;
+}
+.text-with-gradient::after {
+  bottom: 5%;
+  height: 30%;
+}
+.text-with-gradient-excerpt::after {
+  bottom: 0;
+  height: 40%;
+}
