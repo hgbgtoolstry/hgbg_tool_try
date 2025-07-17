@@ -1,0 +1,191 @@
+/* --- 全局与布局 --- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.app-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 100%;
+  max-width: 1600px;
+}
+
+/* --- 左侧控制面板 --- */
+.controls {
+  flex: 1;
+  min-width: 320px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  align-self: flex-start;
+}
+.controls h1 {
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #001f3f;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+.control-group {
+  margin-bottom: 20px;
+}
+.control-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #555;
+}
+.control-group input[type="text"],
+.control-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: inherit;
+}
+.control-group textarea {
+  resize: vertical;
+}
+.slider-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+input[type="range"] {
+  flex-grow: 1;
+  cursor: pointer;
+}
+.slider-value {
+  font-size: 12px;
+  color: #333;
+  background: #eee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 50px;
+  text-align: center;
+}
+#export-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+#export-btn:hover {
+  background-color: #0056b3;
+}
+
+/* --- 右侧名片预览 --- */
+.preview {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 600px;
+}
+
+/* --- 核心布局：名片容器 (上下布局) --- */
+#business-card {
+  width: 550px;
+  aspect-ratio: 1100 / 620; /* 目标尺寸比例 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background-color: #fdfdfc; /* 示例中的微黄背景色 */
+  border-radius: 12px;
+  padding: 40px;
+  box-sizing: border-box;
+
+  /* 字体设定 */
+  font-family: "Noto Sans SC", sans-serif;
+  font-weight: 900; /* 超粗体 */
+  color: #240082; /* 示例中的深蓝色 */
+
+  /* Flexbox 布局: 上下两部分 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* 关键：将上下两部分推到两端 */
+}
+
+/* --- 上部区域：头像 + 姓名 --- */
+.card-top {
+  display: flex;
+  align-items: center; /* 垂直居中对齐头像和姓名块 */
+  gap: 30px; /* 头像和姓名之间的间距 */
+}
+
+.avatar-container {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#preview-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- 关键改动在这里 --- */
+.name-block {
+  flex-grow: 1; /* 让此容器占据所有剩余的横向空间 */
+  text-align: right; /* 将容器内所有文本右对齐 */
+  line-height: 1.1;
+}
+
+#preview-name {
+  font-size: 52px;
+  margin: 0;
+}
+
+#preview-nickname {
+  font-size: 24px;
+  margin: 10px 0 0 0;
+  /* text-align: right; 已被父元素 .name-block 接管，此处不再需要 */
+}
+
+/* --- 下部区域：联系方式 --- */
+.card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* 两行联系方式之间的间距 */
+}
+
+.details-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.details-block i {
+  font-size: 18px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+
+.details-block p {
+  font-size: 16px;
+  margin: 0;
+  line-height: 1.6;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>名片生成器</title>
+    <!-- 引入思源黑体 (Noto Sans SC) - 超粗体 (900) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@900&display=swap" rel="stylesheet">
+    <!-- 引入 Font Awesome 图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- 引入样式表 -->
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入 html2canvas 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+
+    <div class="app-container">
+        <!-- 左侧：控制面板 -->
+        <div class="controls">
+            <h1>名片内容编辑器</h1>
+
+            <div class="control-group">
+                <label for="avatar-upload">上传头像</label>
+                <input type="file" id="avatar-upload" accept="image/*">
+            </div>
+
+            <div class="control-group">
+                <label for="name">姓名 (英文/拼音)</label>
+                <input type="text" id="name" value="Larrtroffen">
+                <div class="slider-group">
+                    <input type="range" id="name-size" min="20" max="80" step="1" value="52">
+                    <span class="slider-value" id="name-size-value">52px</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="nickname">别称 (中文)</label>
+                <input type="text" id="nickname" value="回归不归">
+                <div class="slider-group">
+                    <input type="range" id="nickname-size" min="10" max="50" step="1" value="24">
+                    <span class="slider-value" id="nickname-size-value">24px</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="contact-info">联系方式 (支持多行)</label>
+                <textarea id="contact-info" rows="2">Email: Larrtroffen.gl@gmail.com
+Wechat: Larr_1029</textarea>
+                <div class="slider-group">
+                    <input type="range" id="contact-info-size" min="10" max="30" step="1" value="16">
+                    <span class="slider-value" id="contact-info-size-value">16px</span>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="affiliation">单位/身份</label>
+                <input type="text" id="affiliation" value="XXXX大学XXXX专业本科生">
+                <div class="slider-group">
+                    <input type="range" id="affiliation-size" min="10" max="30" step="1" value="16">
+                    <span class="slider-value" id="affiliation-size-value">16px</span>
+                </div>
+            </div>
+
+            <button id="export-btn">生成并导出名片 (1100x620)</button>
+        </div>
+
+        <!-- 右侧：名片预览 -->
+        <div class="preview">
+            <div id="business-card">
+                <!-- 上部区域：头像 + 姓名 -->
+                <div class="card-top">
+                    <div class="avatar-container">
+                        <img id="preview-avatar" src="" alt="User Avatar">
+                    </div>
+                    <div class="name-block">
+                        <h1 id="preview-name">Larrtroffen</h1>
+                        <h2 id="preview-nickname">回归不归</h2>
+                    </div>
+                </div>
+
+                <!-- 下部区域：联系方式 -->
+                <div class="card-bottom">
+                    <div class="details-block">
+                        <i class="fa-solid fa-globe"></i>
+                        <p id="preview-contact-info"></p>
+                    </div>
+                    <div class="details-block">
+                        <i class="fa-solid fa-map-marker-alt"></i>
+                        <p id="preview-affiliation"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
